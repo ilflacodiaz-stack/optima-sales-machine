@@ -157,10 +157,10 @@ function renderApiStatus(message = "") {
 
   if (elements.commandStatus) {
     elements.commandStatus.textContent = state.apiOnline
-      ? "All agents ready. Run individual agents or full pipeline."
+      ? "All team members ready"
       : isStaticDemo
-        ? "Demo mode - agents run locally or with production API"
-        : "Connect State API to enable agent runs";
+        ? "Demo mode"
+        : "Connect API to enable runs";
   }
 
   if (elements.statusDot) {
@@ -230,27 +230,27 @@ function renderCaseStudy() {
   elements.metricApproved.textContent = stats.approved;
   elements.metricMeetings.textContent = stats.meetings;
   elements.metricMeetingRate.textContent = stats.meetingRate;
-  elements.caseStudyNote.textContent = `${stats.prospects} surfaced, ${stats.qualified} qualified (${stats.qualificationRate}), ${stats.sent} progressed, ${stats.meetings} meetings booked.`;
+  elements.caseStudyNote.textContent = `${stats.prospects} found, ${stats.qualified} qualified (${stats.qualificationRate}), ${stats.sent} sent, ${stats.meetings} meetings.`;
 }
 
 function buildCaseStudySummary() {
   const stats = getCaseStudyStats();
   return `Optima Sales Machine - Case Study
 
-Multi-agent system:
-- Scout finds ICP-fit inmobiliarias
-- James Research enriches and scores prospects
-- Outreach drafts WhatsApp, email, and LinkedIn messages
-- Orchestrator coordinates the daily workflow
+Your AI sales team:
+- Scott finds real estate agencies that match your ideal customer
+- James researches each prospect and identifies their needs
+- Larry writes personalized messages for WhatsApp, email, and LinkedIn
+- Orchestrator runs the full pipeline automatically
 
 Current metrics:
-- Prospects surfaced: ${stats.prospects}
-- Qualified research briefs: ${stats.qualified}
-- Drafts ready for review: ${stats.ready}
-- Approved drafts: ${stats.approved}
-- Outreach sent/progressed: ${stats.sent}
+- Prospects found: ${stats.prospects}
+- Qualified: ${stats.qualified}
+- Drafts ready: ${stats.ready}
+- Approved: ${stats.approved}
+- Sent: ${stats.sent}
 - Meetings booked: ${stats.meetings}
-- Prospect-to-meeting rate: ${stats.meetingRate}`;
+- Conversion rate: ${stats.meetingRate}`;
 }
 
 function renderRuns() {
@@ -369,14 +369,14 @@ function renderDetails() {
           ["CRM Signals", research.crm_signals?.join(", ") || "None"],
           ["Competitors", research.competitor_signals?.join(", ") || "None"],
           ["Angle", research.outreach_angle]
-        ]) : emptyCard("Research Brief", "Waiting for Research Agent.")}
+        ]) : emptyCard("Research Brief", "Waiting for James to research.")}
 
-        ${research ? listCard("Pain Points", research.pain_points) : emptyCard("Pain Points", "Research Agent has not written pain points yet.")}
-        ${research ? listCard("Sources", research.sources?.length ? research.sources : ["No sources saved yet."]) : emptyCard("Sources", "Research Agent has not saved sources yet.")}
+        ${research ? listCard("Pain Points", research.pain_points) : emptyCard("Pain Points", "James has not identified pain points yet.")}
+        ${research ? listCard("Sources", research.sources?.length ? research.sources : ["No sources saved yet."]) : emptyCard("Sources", "James has not saved sources yet.")}
       </div>
 
       <div class="drafts-section">
-        ${outreach ? renderDrafts(outreach) : emptyCard("Outreach Drafts", "Waiting for Outreach Agent.")}
+        ${outreach ? renderDrafts(outreach) : emptyCard("Outreach Drafts", "Waiting for Larry to write drafts.")}
       </div>
     </div>
   `;

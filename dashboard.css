@@ -399,43 +399,59 @@ button {
 .agent-card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.agent-number {
-  width: 24px;
-  height: 24px;
+.agent-avatar {
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 700;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--secondary);
+  color: var(--foreground);
 }
 
-.agent-card:nth-child(1) .agent-number {
+.agent-card:nth-child(1) .agent-avatar {
   background: rgba(34, 197, 94, 0.15);
   color: var(--agent-scout);
 }
 
-.agent-card:nth-child(2) .agent-number {
+.agent-card:nth-child(2) .agent-avatar {
   background: rgba(59, 130, 246, 0.15);
   color: var(--agent-research);
 }
 
-.agent-card:nth-child(3) .agent-number {
+.agent-card:nth-child(3) .agent-avatar {
   background: rgba(168, 85, 247, 0.15);
   color: var(--agent-outreach);
 }
 
-.agent-card:nth-child(4) .agent-number {
+.agent-card:nth-child(4) .agent-avatar {
   background: rgba(245, 158, 11, 0.15);
   color: var(--agent-orchestrator);
+}
+
+.agent-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .agent-name {
   font-size: 14px;
   font-weight: 600;
+  line-height: 1.2;
+}
+
+.agent-role {
+  font-size: 11px;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .agent-status {
