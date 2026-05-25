@@ -39,24 +39,24 @@
           </div>
 
           <div class="nav-section">
-            <div class="nav-section-label">Agents</div>
+            <div class="nav-section-label">Team</div>
             <button class="nav-item" type="button" data-runner="scout">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
-              Scout
+              Scott
             </button>
             <button class="nav-item" type="button" data-runner="research">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
               </svg>
-              Research
+              James
             </button>
             <button class="nav-item" type="button" data-runner="outreach">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
               </svg>
-              Outreach
+              Larry
             </button>
           </div>
 
@@ -64,19 +64,19 @@
             <div class="nav-section-label">Pipeline</div>
             <div class="pipeline-mini">
               <div class="pipeline-step">
-                <div class="pipeline-dot scout"></div>
-                <span class="pipeline-step-label">Scout finds leads</span>
-              </div>
-              <div class="pipeline-connector"></div>
-              <div class="pipeline-step">
-                <div class="pipeline-dot research"></div>
-                <span class="pipeline-step-label">Research qualifies</span>
-              </div>
-              <div class="pipeline-connector"></div>
-              <div class="pipeline-step">
-                <div class="pipeline-dot outreach"></div>
-                <span class="pipeline-step-label">Outreach drafts</span>
-              </div>
+              <div class="pipeline-dot scout"></div>
+              <span class="pipeline-step-label">Scott finds leads</span>
+            </div>
+            <div class="pipeline-connector"></div>
+            <div class="pipeline-step">
+              <div class="pipeline-dot research"></div>
+              <span class="pipeline-step-label">James researches</span>
+            </div>
+            <div class="pipeline-connector"></div>
+            <div class="pipeline-step">
+              <div class="pipeline-dot outreach"></div>
+              <span class="pipeline-step-label">Larry writes</span>
+            </div>
             </div>
           </div>
         </nav>
@@ -98,7 +98,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </button>
-            <span class="topbar-title">Command Center</span>
+            <span class="topbar-title">Dashboard</span>
           </div>
           <div class="topbar-right">
             <button class="topbar-btn" id="refreshBtn" type="button">
@@ -129,7 +129,7 @@
                 </div>
               </div>
               <div class="metric-value" id="metricProspects">0</div>
-              <div class="metric-change">Surfaced by Scout</div>
+              <div class="metric-change">Found by Scott</div>
             </article>
             <article class="metric-card">
               <div class="metric-header">
@@ -153,7 +153,7 @@
                 </div>
               </div>
               <div class="metric-value" id="metricQualified">0</div>
-              <div class="metric-change">Ready for outreach</div>
+              <div class="metric-change">Ready for Larry</div>
             </article>
             <article class="metric-card">
               <div class="metric-header">
@@ -165,7 +165,7 @@
                 </div>
               </div>
               <div class="metric-value" id="metricDrafts">0</div>
-              <div class="metric-change">Pending review</div>
+              <div class="metric-change">Awaiting review</div>
             </article>
           </section>
 
@@ -173,46 +173,58 @@
           <section class="section" aria-label="Agent command center">
             <div class="section-header">
               <div>
-                <h2 class="section-title">Agent Command Center</h2>
-                <p class="section-subtitle" id="commandStatus">Checking connection status</p>
+                <h2 class="section-title">Your Sales Team</h2>
+                <p class="section-subtitle" id="commandStatus">Checking status...</p>
               </div>
             </div>
             <div class="agent-grid">
               <article class="agent-card">
                 <div class="agent-card-header">
-                  <span class="agent-number">01</span>
-                  <span class="agent-name">Scout</span>
+                  <div class="agent-avatar">S</div>
+                  <div class="agent-info">
+                    <span class="agent-name">Scott</span>
+                    <span class="agent-role">Scout</span>
+                  </div>
                   <div class="agent-status" id="scoutStatus"></div>
                 </div>
-                <p class="agent-desc">Monitors source lists and identifies ICP-fit inmobiliarias.</p>
-                <button class="agent-btn" data-runner="scout" type="button">Run Scout</button>
+                <p class="agent-desc">Finds new real estate agencies that match your ideal customer profile.</p>
+                <button class="agent-btn" data-runner="scout" type="button">Run Scott</button>
               </article>
               <article class="agent-card">
                 <div class="agent-card-header">
-                  <span class="agent-number">02</span>
-                  <span class="agent-name">James Research</span>
+                  <div class="agent-avatar">J</div>
+                  <div class="agent-info">
+                    <span class="agent-name">James</span>
+                    <span class="agent-role">Research</span>
+                  </div>
                   <div class="agent-status" id="researchStatus"></div>
                 </div>
-                <p class="agent-desc">Enriches prospects with CRM signals, pain points, and scores.</p>
-                <button class="agent-btn" data-runner="research" type="button">Run Research</button>
+                <p class="agent-desc">Learns about each prospect and identifies their specific needs.</p>
+                <button class="agent-btn" data-runner="research" type="button">Run James</button>
               </article>
               <article class="agent-card">
                 <div class="agent-card-header">
-                  <span class="agent-number">03</span>
-                  <span class="agent-name">Outreach</span>
+                  <div class="agent-avatar">L</div>
+                  <div class="agent-info">
+                    <span class="agent-name">Larry</span>
+                    <span class="agent-role">Outreach</span>
+                  </div>
                   <div class="agent-status" id="outreachStatus"></div>
                 </div>
-                <p class="agent-desc">Drafts personalized WhatsApp, email, and LinkedIn messages.</p>
-                <button class="agent-btn" data-runner="outreach" type="button">Run Outreach</button>
+                <p class="agent-desc">Writes personalized messages for WhatsApp, email, and LinkedIn.</p>
+                <button class="agent-btn" data-runner="outreach" type="button">Run Larry</button>
               </article>
               <article class="agent-card">
                 <div class="agent-card-header">
-                  <span class="agent-number">04</span>
-                  <span class="agent-name">Orchestrator</span>
+                  <div class="agent-avatar">L</div>
+                  <div class="agent-info">
+                    <span class="agent-name">Ludwig</span>
+                    <span class="agent-role">Orchestrator</span>
+                  </div>
                   <div class="agent-status" id="orchestratorStatus"></div>
                 </div>
-                <p class="agent-desc">Coordinates daily pipeline: Scout, Research, then Outreach.</p>
-                <button class="agent-btn" data-runner="pipeline" type="button">Run Full Pipeline</button>
+                <p class="agent-desc">Conducts the full pipeline: Scott finds, James researches, Larry writes.</p>
+                <button class="agent-btn" data-runner="pipeline" type="button">Run All</button>
               </article>
             </div>
           </section>

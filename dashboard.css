@@ -1,36 +1,36 @@
 :root {
   color-scheme: dark;
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --card: #111111;
-  --card-foreground: #fafafa;
-  --popover: #111111;
-  --popover-foreground: #fafafa;
-  --primary: #3b82f6;
-  --primary-foreground: #fafafa;
-  --secondary: #1f1f1f;
-  --secondary-foreground: #fafafa;
-  --muted: #171717;
-  --muted-foreground: #a1a1aa;
-  --accent: #1f1f1f;
-  --accent-foreground: #fafafa;
+  --background: #0c0a0f;
+  --foreground: #faf8f5;
+  --card: #13111a;
+  --card-foreground: #faf8f5;
+  --popover: #13111a;
+  --popover-foreground: #faf8f5;
+  --primary: #b794f4;
+  --primary-foreground: #0c0a0f;
+  --secondary: #1a1721;
+  --secondary-foreground: #faf8f5;
+  --muted: #151219;
+  --muted-foreground: #a8a3b3;
+  --accent: #e8b4a0;
+  --accent-foreground: #0c0a0f;
   --destructive: #ef4444;
-  --destructive-foreground: #fafafa;
-  --border: #262626;
-  --input: #262626;
-  --ring: #3b82f6;
+  --destructive-foreground: #faf8f5;
+  --border: #2a2533;
+  --input: #2a2533;
+  --ring: #b794f4;
   --radius: 8px;
 
   /* Status colors */
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --info: #3b82f6;
+  --success: #68d391;
+  --warning: #f6c177;
+  --info: #b794f4;
 
-  /* Agent colors */
-  --agent-scout: #22c55e;
-  --agent-research: #3b82f6;
-  --agent-outreach: #a855f7;
-  --agent-orchestrator: #f59e0b;
+  /* Agent colors - Optima palette */
+  --agent-scout: #68d391;
+  --agent-research: #b794f4;
+  --agent-outreach: #e8b4a0;
+  --agent-orchestrator: #f6c177;
 }
 
 * {
@@ -399,43 +399,59 @@ button {
 .agent-card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.agent-number {
-  width: 24px;
-  height: 24px;
+.agent-avatar {
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 700;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--secondary);
+  color: var(--foreground);
 }
 
-.agent-card:nth-child(1) .agent-number {
-  background: rgba(34, 197, 94, 0.15);
+.agent-card:nth-child(1) .agent-avatar {
+  background: rgba(104, 211, 145, 0.15);
   color: var(--agent-scout);
 }
 
-.agent-card:nth-child(2) .agent-number {
-  background: rgba(59, 130, 246, 0.15);
+.agent-card:nth-child(2) .agent-avatar {
+  background: rgba(183, 148, 244, 0.15);
   color: var(--agent-research);
 }
 
-.agent-card:nth-child(3) .agent-number {
-  background: rgba(168, 85, 247, 0.15);
+.agent-card:nth-child(3) .agent-avatar {
+  background: rgba(232, 180, 160, 0.15);
   color: var(--agent-outreach);
 }
 
-.agent-card:nth-child(4) .agent-number {
-  background: rgba(245, 158, 11, 0.15);
+.agent-card:nth-child(4) .agent-avatar {
+  background: rgba(246, 193, 119, 0.15);
   color: var(--agent-orchestrator);
+}
+
+.agent-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .agent-name {
   font-size: 14px;
   font-weight: 600;
+  line-height: 1.2;
+}
+
+.agent-role {
+  font-size: 11px;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .agent-status {
@@ -790,12 +806,12 @@ button {
 }
 
 .tag.success {
-  background: rgba(34, 197, 94, 0.15);
+  background: rgba(104, 211, 145, 0.15);
   color: var(--success);
 }
 
 .tag.warning {
-  background: rgba(245, 158, 11, 0.15);
+  background: rgba(246, 193, 119, 0.15);
   color: var(--warning);
 }
 
@@ -805,7 +821,7 @@ button {
 }
 
 .tag.info {
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(183, 148, 244, 0.15);
   color: var(--info);
 }
 
@@ -1005,12 +1021,12 @@ button {
 
 .draft-btn.success {
   color: var(--success);
-  border-color: rgba(34, 197, 94, 0.3);
+  border-color: rgba(104, 211, 145, 0.3);
 }
 
 .draft-btn.warning {
   color: var(--warning);
-  border-color: rgba(245, 158, 11, 0.3);
+  border-color: rgba(246, 193, 119, 0.3);
 }
 
 /* Outcome Block */
