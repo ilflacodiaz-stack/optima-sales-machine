@@ -241,7 +241,7 @@ Your AI sales team:
 - Scott finds real estate agencies that match your ideal customer
 - James researches each prospect and identifies their needs
 - Larry writes personalized messages for WhatsApp, email, and LinkedIn
-- Beethoven conducts the full pipeline automatically
+- Ludwig conducts the full pipeline automatically
 
 Current metrics:
 - Prospects found: ${stats.prospects}
