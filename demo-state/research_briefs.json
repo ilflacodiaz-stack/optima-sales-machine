@@ -1,0 +1,64 @@
+[
+  {
+    "prospect_id": "demo-propiedades",
+    "company_name": "Demo Propiedades",
+    "summary": "Active inmobiliaria used for Sprint 4 smoke testing.",
+    "locations": ["CABA"],
+    "estimated_activity": "35 listing estimate",
+    "crm_signals": ["No CRM detectable"],
+    "competitor_signals": [],
+    "pain_points": [
+      "Manual WhatsApp follow-up",
+      "No visible lead qualification"
+    ],
+    "outreach_angle": "Improve portal lead response and qualification",
+    "qualification_score": 82,
+    "confidence": "medium",
+    "sources": [],
+    "status": "QUALIFIED",
+    "created_at": "2026-05-23T23:01:37.688Z",
+    "updated_at": "2026-05-23T23:01:37.688Z"
+  },
+  {
+    "prospect_id": "premium-homes-caba",
+    "company_name": "Premium Homes CABA",
+    "summary": "Premium-focused CABA brokerage with visible portal activity, public WhatsApp contact, and multi-channel inbound paths.",
+    "locations": ["Palermo", "Recoleta", "Belgrano"],
+    "estimated_activity": "High listing volume across premium residential inventory.",
+    "crm_signals": ["Website lead form", "WhatsApp-heavy contact path"],
+    "competitor_signals": ["Portal-first lead flow"],
+    "pain_points": [
+      "High-value inquiries need fast qualification",
+      "Multi-channel leads can fragment across website, portals, and WhatsApp",
+      "Advisory tone must stay personalized while response speed improves"
+    ],
+    "outreach_angle": "Help the team qualify premium inquiries faster without losing high-touch advisory style.",
+    "qualification_score": 88,
+    "confidence": "high",
+    "sources": ["Public website", "Portal listing scan", "LinkedIn company profile"],
+    "status": "QUALIFIED",
+    "created_at": "2026-05-24T01:08:29.602Z",
+    "updated_at": "2026-05-24T01:08:29.602Z"
+  },
+  {
+    "prospect_id": "urban-norte-realty",
+    "company_name": "Urban Norte Realty",
+    "summary": "Zona Norte brokerage with active residential listings and WhatsApp-first contact behavior.",
+    "locations": ["Vicente Lopez", "San Isidro", "Tigre"],
+    "estimated_activity": "Medium listing volume with repeated portal presence.",
+    "crm_signals": ["No public CRM detected", "WhatsApp primary"],
+    "competitor_signals": ["Portal presence"],
+    "pain_points": [
+      "Inbound inquiries likely arrive from multiple portals",
+      "Manual qualification can slow response time",
+      "Follow-up tracking may depend on individual agents"
+    ],
+    "outreach_angle": "Centralize and qualify portal inquiries before passing them to the sales team.",
+    "qualification_score": 76,
+    "confidence": "medium",
+    "sources": ["Portal listing scan", "Public contact profile"],
+    "status": "QUALIFIED",
+    "created_at": "2026-05-24T01:08:29.602Z",
+    "updated_at": "2026-05-24T01:08:29.602Z"
+  }
+]

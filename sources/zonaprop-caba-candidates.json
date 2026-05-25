@@ -1,0 +1,64 @@
+{
+  "source_name": "Zonaprop CABA inmobiliarias",
+  "source_url": "https://www.zonaprop.com.ar/inmobiliarias-caba.html",
+  "captured_at": "2026-05-24",
+  "notes": "Public search result source used for the first automated Scout run. Counts are source estimates and should be verified by Research Agent.",
+  "candidates": [
+    {
+      "company_name": "C21 Revolution S.A.",
+      "location": "CABA",
+      "listing_count_estimate": 209,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 209 purchase listings and public portal contact actions."
+    },
+    {
+      "company_name": "Inmobiliaria Ballarre",
+      "location": "CABA",
+      "listing_count_estimate": 201,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 199 purchase listings and 2 rental listings."
+    },
+    {
+      "company_name": "Alberti Propiedades",
+      "location": "CABA",
+      "listing_count_estimate": 167,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 167 purchase listings."
+    },
+    {
+      "company_name": "Barbini Propiedades",
+      "location": "CABA",
+      "listing_count_estimate": 158,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 151 purchase listings and 7 rental listings."
+    },
+    {
+      "company_name": "Palau Propiedades",
+      "location": "CABA",
+      "listing_count_estimate": 153,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 117 purchase listings and 36 rental listings."
+    },
+    {
+      "company_name": "Andrea Gianfelice Inmobiliaria",
+      "location": "CABA",
+      "listing_count_estimate": 147,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 102 purchase listings and 45 rental listings."
+    },
+    {
+      "company_name": "Inmobiliaria CIP",
+      "location": "CABA",
+      "listing_count_estimate": 143,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 139 purchase listings and 4 rental listings."
+    },
+    {
+      "company_name": "Battaglia Inmobiliaria",
+      "location": "CABA",
+      "listing_count_estimate": 132,
+      "contact_paths": ["zonaprop"],
+      "source_detail": "Zonaprop result showed 128 purchase listings and 4 rental listings."
+    }
+  ]
+}

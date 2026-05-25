@@ -1,0 +1,51 @@
+{
+  "name": "Optima Daily Sales Machine",
+  "id": "optima-daily-sales-machine",
+  "description": "Daily OpenClaw-native multi-agent workflow for Scout -> James Research -> Outreach -> Donna-style summary.",
+  "schedule": {
+    "type": "daily",
+    "suggested_time_local": "08:30",
+    "timezone": "America/Argentina/Buenos_Aires"
+  },
+  "agents": [
+    "optima-scout",
+    "optima-james-research",
+    "optima-outreach",
+    "optima-orchestrator"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "agent": "optima-orchestrator",
+      "action": "start_daily_run",
+      "tool": "optima_sales_machine_state_api.run_pipeline",
+      "input": {
+        "scout_source": "optima-sales-machine/sources/zonaprop-caba-candidates.json",
+        "research_hints": "optima-sales-machine/sources/james-research-hints.json",
+        "limit": 3
+      }
+    },
+    {
+      "step": 2,
+      "agent": "optima-orchestrator",
+      "action": "read_summary",
+      "tool": "optima_sales_machine_state_api.get_summary"
+    },
+    {
+      "step": 3,
+      "agent": "optima-orchestrator",
+      "action": "send_daily_telegram_summary",
+      "tool": "optima_sales_machine_state_api.telegram_command",
+      "input": {
+        "text": "/today"
+      }
+    }
+  ],
+  "success_criteria": [
+    "Scout logs a daily run",
+    "New prospects are deduped and written as SCOUTED",
+    "James Research writes research briefs for new SCOUTED prospects",
+    "Outreach writes drafts for QUALIFIED prospects",
+    "Alfonso receives a daily summary with review commands"
+  ]
+}

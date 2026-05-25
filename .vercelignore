@@ -1,0 +1,14 @@
+.env
+.env.*
+.openclaw
+state/**
+agents/**
+openclaw/**
+sources/**
+tools/**
+docs/**
+schemas/**
+*.md
+render.yaml
+node_modules/**
+npm-debug.log

@@ -1,0 +1,36 @@
+[
+  {
+    "run_id": "scout-demo-001",
+    "run_type": "SCOUT",
+    "source_name": "Zonaprop CABA inmobiliarias",
+    "source_url": "https://www.zonaprop.com.ar/inmobiliarias-caba.html",
+    "source_file": "demo-state/prospects.json",
+    "candidates_seen": 8,
+    "prospects_added": ["premium-homes-caba", "urban-norte-realty"],
+    "duplicates_skipped": ["demo-propiedades"],
+    "rejected": [],
+    "status": "COMPLETED",
+    "created_at": "2026-05-24T00:56:19.765Z"
+  },
+  {
+    "run_id": "research-demo-001",
+    "run_type": "RESEARCH",
+    "agent_base": "James / Lead Intelligence Agent",
+    "prospects_seen": 3,
+    "research_added": ["demo-propiedades", "premium-homes-caba", "urban-norte-realty"],
+    "status": "COMPLETED",
+    "created_at": "2026-05-24T01:08:29.602Z"
+  },
+  {
+    "run_id": "outreach-demo-001",
+    "run_type": "OUTREACH",
+    "prospects_seen": 3,
+    "drafts_added": [
+      "demo-propiedades-1779577305559",
+      "premium-homes-caba-1779584920837",
+      "urban-norte-realty-1779584920838"
+    ],
+    "status": "COMPLETED",
+    "created_at": "2026-05-24T01:08:40.838Z"
+  }
+]

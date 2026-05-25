@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Optima Sales Machine</title>
+    <link rel="stylesheet" href="dashboard.css">
+  </head>
+  <body>
+    <main class="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Sprint 4</p>
+          <h1>Optima Sales Machine</h1>
+          <p class="topbar-subtitle">OpenClaw-native prospecting system for inmobiliaria outreach.</p>
+        </div>
+        <div class="status-pill" id="lastUpdated">Loading state</div>
+      </header>
+
+      <section class="proof-strip" aria-label="System proof points">
+        <article>
+          <strong>OpenClaw Native</strong>
+          <span>4 registered agents</span>
+        </article>
+        <article>
+          <strong>Shared State</strong>
+          <span>prospects, briefs, drafts, outcomes</span>
+        </article>
+        <article>
+          <strong>Dashboard First</strong>
+          <span>portfolio-ready control surface</span>
+        </article>
+      </section>
+
+      <section class="metrics" aria-label="Pipeline metrics">
+        <article>
+          <span id="metricProspects">0</span>
+          <p>Prospects</p>
+        </article>
+        <article>
+          <span id="metricResearched">0</span>
+          <p>Research briefs</p>
+        </article>
+        <article>
+          <span id="metricQualified">0</span>
+          <p>Qualified</p>
+        </article>
+        <article>
+          <span id="metricDrafts">0</span>
+          <p>Drafts ready</p>
+        </article>
+      </section>
+
+      <section class="case-study" aria-label="Case study tracker">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Month One</p>
+            <h2>Case Study Tracker</h2>
+          </div>
+          <button id="copyCaseStudyBtn" type="button">Copy summary</button>
+        </div>
+        <div class="funnel-grid">
+          <article>
+            <span id="metricReviewQueue">0</span>
+            <p>Ready for review</p>
+          </article>
+          <article>
+            <span id="metricApproved">0</span>
+            <p>Approved drafts</p>
+          </article>
+          <article>
+            <span id="metricMeetings">0</span>
+            <p>Meetings booked</p>
+          </article>
+          <article>
+            <span id="metricMeetingRate">0%</span>
+            <p>Prospect to meeting</p>
+          </article>
+        </div>
+        <p class="case-note" id="caseStudyNote">Loading case study metrics.</p>
+      </section>
+
+      <section class="pipeline" aria-label="Agent pipeline">
+        <article>
+          <small>01</small>
+          <strong>Scout Agent</strong>
+          <p>Finds candidate inmobiliarias and writes prospect records.</p>
+        </article>
+        <div class="connector"></div>
+        <article>
+          <small>02</small>
+          <strong>Research Agent</strong>
+          <p>Enriches prospects, detects CRM signals, and scores fit.</p>
+        </article>
+        <div class="connector"></div>
+        <article>
+          <small>03</small>
+          <strong>Outreach Agent</strong>
+          <p>Drafts WhatsApp, email, and LinkedIn messages for review.</p>
+        </article>
+      </section>
+
+      <section class="command-center" aria-label="Agent command center">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">OpenClaw Native Team</p>
+            <h2>Agent Command Center</h2>
+          </div>
+          <div class="command-status" id="commandStatus">Ready when State API is connected</div>
+        </div>
+        <div class="agent-grid">
+          <article class="agent-card">
+            <div class="agent-card-header">
+              <span>01</span>
+              <strong>Scout</strong>
+            </div>
+            <p>Monitors source lists and writes SCOUTED prospects.</p>
+            <button data-runner="scout" type="button">Run Scout</button>
+          </article>
+          <article class="agent-card">
+            <div class="agent-card-header">
+              <span>02</span>
+              <strong>James Research</strong>
+            </div>
+            <p>Turns scouted prospects into scored research briefs.</p>
+            <button data-runner="research" type="button">Run Research</button>
+          </article>
+          <article class="agent-card">
+            <div class="agent-card-header">
+              <span>03</span>
+              <strong>Outreach</strong>
+            </div>
+            <p>Drafts WhatsApp, email, and LinkedIn messages.</p>
+            <button data-runner="outreach" type="button">Run Outreach</button>
+          </article>
+          <article class="agent-card orchestrator">
+            <div class="agent-card-header">
+              <span>04</span>
+              <strong>Orchestrator</strong>
+            </div>
+            <p>Runs Scout -> James -> Outreach and prepares the daily review.</p>
+            <button data-runner="pipeline" type="button">Run Daily Sequence</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="runs-panel" aria-label="Daily agent runs">
+        <div class="section-heading">
+          <h2>Daily Runs</h2>
+        </div>
+        <div id="dailyRuns"></div>
+      </section>
+
+      <section class="workspace">
+        <aside class="prospect-list">
+          <div class="section-heading">
+            <h2>Prospects</h2>
+            <button id="refreshBtn" type="button">Refresh</button>
+          </div>
+          <form class="prospect-form" id="prospectForm">
+            <label>
+              Company
+              <input id="companyInput" name="company_name" type="text" placeholder="Inmobiliaria name" required>
+            </label>
+            <label>
+              Location
+              <input id="locationInput" name="location" type="text" placeholder="CABA / GBA / Argentina">
+            </label>
+            <label>
+              Why flagged
+              <textarea id="whyInput" name="why_flagged" rows="3" placeholder="What makes this worth researching?"></textarea>
+            </label>
+            <div class="form-row">
+              <label>
+                Source
+                <input id="sourceInput" name="source" type="text" value="manual dashboard">
+              </label>
+              <label>
+                Listings
+                <input id="listingsInput" name="listing_count_estimate" type="number" min="0" placeholder="35">
+              </label>
+            </div>
+            <div class="checkbox-row" aria-label="Contact paths">
+              <label><input name="contact_paths" type="checkbox" value="website"> Website</label>
+              <label><input name="contact_paths" type="checkbox" value="whatsapp"> WhatsApp</label>
+              <label><input name="contact_paths" type="checkbox" value="linkedin"> LinkedIn</label>
+            </div>
+            <button class="submit-btn" type="submit">Add prospect</button>
+            <p class="form-status" id="formStatus">State API: checking</p>
+          </form>
+          <div id="prospectList"></div>
+        </aside>
+
+        <section class="detail-panel" id="detailPanel">
+          <div class="empty-state">
+            <h2>Select a prospect</h2>
+            <p>Choose a prospect to inspect the multi-agent handoff.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>

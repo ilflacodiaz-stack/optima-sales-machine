@@ -1,0 +1,44 @@
+[
+  {
+    "prospect_id": "demo-propiedades",
+    "company_name": "Demo Propiedades",
+    "source": "manual smoke test",
+    "source_url": "",
+    "location": "CABA",
+    "listing_count_estimate": 35,
+    "contact_paths": ["website", "whatsapp"],
+    "why_flagged": "Smoke test prospect for the multi-agent handoff flow.",
+    "confidence": "medium",
+    "status": "SCOUTED",
+    "created_at": "2026-05-23T23:01:33.616Z",
+    "updated_at": "2026-05-23T23:01:33.616Z"
+  },
+  {
+    "prospect_id": "premium-homes-caba",
+    "company_name": "Premium Homes CABA",
+    "source": "Zonaprop CABA inmobiliarias",
+    "source_url": "",
+    "location": "CABA",
+    "listing_count_estimate": 128,
+    "contact_paths": ["website", "whatsapp", "linkedin"],
+    "why_flagged": "High listing volume, premium inventory, and multiple public contact paths.",
+    "confidence": "high",
+    "status": "SCOUTED",
+    "created_at": "2026-05-24T00:56:19.765Z",
+    "updated_at": "2026-05-24T00:56:19.765Z"
+  },
+  {
+    "prospect_id": "urban-norte-realty",
+    "company_name": "Urban Norte Realty",
+    "source": "Argenprop scan",
+    "source_url": "",
+    "location": "Zona Norte",
+    "listing_count_estimate": 74,
+    "contact_paths": ["website", "whatsapp"],
+    "why_flagged": "Active portal presence and visible WhatsApp-first inquiry flow.",
+    "confidence": "medium",
+    "status": "SCOUTED",
+    "created_at": "2026-05-24T00:56:19.765Z",
+    "updated_at": "2026-05-24T00:56:19.765Z"
+  }
+]

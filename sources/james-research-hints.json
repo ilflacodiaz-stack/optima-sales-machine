@@ -1,0 +1,67 @@
+{
+  "captured_at": "2026-05-24",
+  "notes": "Research hints gathered from public web results. The Research Agent should keep claims conservative and mark uncertain signals as not visibly detected.",
+  "hints": {
+    "c21-revolution-s-a": {
+      "summary_hint": "C21 Revolution S.A. appears as an active inmobiliaria with portal presence, TodoProps contact profile, and Argenprop presence. Public TodoProps result references contact email and a direct contact flow.",
+      "locations": ["CABA", "Buenos Aires"],
+      "estimated_activity": "Scout estimate: 209 Zonaprop purchase listings. TodoProps profile also showed a smaller direct listing count, so portal counts should be treated as source estimates.",
+      "crm_signals": ["No visible CRM detected from available snippets", "Portal-heavy contact path", "Contact form / direct contact flow"],
+      "competitor_signals": ["Zonaprop portal presence", "Argenprop presence", "TodoProps profile"],
+      "pain_points": [
+        "High listing volume can create a heavy manual qualification load",
+        "Portal and contact form inquiries may need faster routing to the right advisor",
+        "Franchise-style brand needs consistent response quality across leads"
+      ],
+      "outreach_angle": "Help the team respond to and qualify portal inquiries faster while keeping a consistent Century 21-style advisory standard.",
+      "qualification_score": 84,
+      "confidence": "medium",
+      "sources": [
+        "https://www.zonaprop.com.ar/inmobiliarias-caba.html",
+        "https://www.todoprops.com/inmobiliarias/inmobiliaria/c21-revolution-sa?publisher=1507885",
+        "https://www.argenprop.com/c21-revolution"
+      ]
+    },
+    "inmobiliaria-ballarre": {
+      "summary_hint": "Inmobiliaria Ballarre has an official site and long-running local positioning in Miramar, with public contact paths and a portfolio of sale/rental properties. Scout source showed strong portal activity.",
+      "locations": ["Miramar", "Buenos Aires"],
+      "estimated_activity": "Scout estimate: 201 Zonaprop listings. Official site highlights selected properties, rentals, sales, appraisals, and seasonal activity.",
+      "crm_signals": ["No visible CRM detected from available snippets", "Website contact path", "Phone/email contact path"],
+      "competitor_signals": ["Zonaprop portal presence"],
+      "pain_points": [
+        "Seasonal and rental inquiries can create spikes that are hard to answer quickly",
+        "Phone/email/manual website inquiries may be difficult to qualify consistently",
+        "Large traditional inventory benefits from automated first response and follow-up"
+      ],
+      "outreach_angle": "Position Optima as a fast-response assistant for seasonal, rental, and sale inquiries without changing their traditional advisory style.",
+      "qualification_score": 78,
+      "confidence": "medium",
+      "sources": [
+        "https://www.zonaprop.com.ar/inmobiliarias-caba.html",
+        "https://www.ballarre.com.ar/",
+        "https://puntoclick.com.ar/empresa/inmobiliaria-ballarre"
+      ]
+    },
+    "alberti-propiedades": {
+      "summary_hint": "Alberti Propiedades presents as a family real estate firm in Haedo/Moron with more than 15 years in the market, public website/contact form, portal presence, and emphasis on broad property diffusion.",
+      "locations": ["Haedo", "Moron", "Buenos Aires", "GBA"],
+      "estimated_activity": "Scout estimate: 167 Zonaprop listings. Public Zonaprop result for Alberti Propiedades showed 148 listings in another index result.",
+      "crm_signals": ["No visible CRM detected from available snippets", "Website contact form", "Portal-heavy lead flow"],
+      "competitor_signals": ["Zonaprop portal presence"],
+      "pain_points": [
+        "Broad portal and website diffusion can fragment inquiries across channels",
+        "Contact form leads need fast follow-up and qualification",
+        "Personalized family-business service can be protected by automating only the first triage"
+      ],
+      "outreach_angle": "Help Alberti respond faster to web and portal inquiries while preserving their personal family-business advisory style.",
+      "qualification_score": 80,
+      "confidence": "medium",
+      "sources": [
+        "https://www.zonaprop.com.ar/inmobiliarias-caba.html",
+        "https://www.alberti.com.ar/pagina/nuestra-inmobiliaria",
+        "https://www.alberti.com.ar/contacto/",
+        "https://www.zonaprop.com.ar/inmobiliarias/alberti-propiedades_17099095-inmuebles.html"
+      ]
+    }
+  }
+}

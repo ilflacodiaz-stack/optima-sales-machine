@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Brief",
+  "type": "object",
+  "required": [
+    "prospect_id",
+    "company_name",
+    "summary",
+    "qualification_score",
+    "status"
+  ],
+  "properties": {
+    "prospect_id": { "type": "string" },
+    "company_name": { "type": "string" },
+    "summary": { "type": "string" },
+    "locations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "estimated_activity": { "type": "string" },
+    "crm_signals": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "competitor_signals": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "pain_points": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "outreach_angle": { "type": "string" },
+    "qualification_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["RESEARCHED", "QUALIFIED", "REJECTED", "NEEDS_REVIEW"]
+    },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

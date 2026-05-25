@@ -1,0 +1,85 @@
+{
+  "name": "optima_sales_machine_state_api",
+  "base_url": "http://127.0.0.1:8787",
+  "description": "Shared state and orchestration API for the Optima Sales Machine multi-agent workflow.",
+  "tools": [
+    {
+      "name": "get_summary",
+      "method": "GET",
+      "path": "/summary",
+      "description": "Read pipeline metrics."
+    },
+    {
+      "name": "list_prospects",
+      "method": "GET",
+      "path": "/prospects",
+      "description": "List prospect records. Optional query params: status, prospect_id."
+    },
+    {
+      "name": "create_prospect",
+      "method": "POST",
+      "path": "/prospects",
+      "description": "Write a new SCOUTED prospect record."
+    },
+    {
+      "name": "list_research_briefs",
+      "method": "GET",
+      "path": "/research-briefs",
+      "description": "List research brief records. Optional query params: status, prospect_id."
+    },
+    {
+      "name": "create_research_brief",
+      "method": "POST",
+      "path": "/research-briefs",
+      "description": "Write a structured research brief."
+    },
+    {
+      "name": "list_outreach_drafts",
+      "method": "GET",
+      "path": "/outreach-drafts",
+      "description": "List outreach draft records. Optional query params: status, prospect_id."
+    },
+    {
+      "name": "create_outreach_draft",
+      "method": "POST",
+      "path": "/outreach-drafts",
+      "description": "Write WhatsApp, email, and LinkedIn review-ready drafts."
+    },
+    {
+      "name": "update_outreach_draft",
+      "method": "PATCH",
+      "path": "/outreach-drafts/{draft_id}",
+      "description": "Update review and outcome state for an outreach draft."
+    },
+    {
+      "name": "run_scout",
+      "method": "POST",
+      "path": "/scout/run",
+      "description": "Run the Scout stage from a candidate source file."
+    },
+    {
+      "name": "run_research",
+      "method": "POST",
+      "path": "/research/run",
+      "description": "Run James-style Research on SCOUTED prospects."
+    },
+    {
+      "name": "run_outreach",
+      "method": "POST",
+      "path": "/outreach/run",
+      "description": "Run Outreach on QUALIFIED research briefs."
+    },
+    {
+      "name": "run_pipeline",
+      "method": "POST",
+      "path": "/pipeline/run",
+      "description": "Run Scout -> Research -> Outreach."
+    },
+    {
+      "name": "telegram_command",
+      "method": "POST",
+      "path": "/telegram-command",
+      "description": "Route /today, /prospects, /brief, /drafts, /approve, /mark_sent, and related commands."
+    }
+  ]
+}

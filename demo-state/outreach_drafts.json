@@ -1,0 +1,48 @@
+[
+  {
+    "draft_id": "demo-propiedades-1779577305559",
+    "prospect_id": "demo-propiedades",
+    "company_name": "Demo Propiedades",
+    "angle_used": "Improve portal lead response and qualification",
+    "whatsapp": "Hola, ¿cómo estás? Vi que tienen bastante movimiento en CABA y quería preguntarte cómo están manejando las consultas que entran por portales. En Optima ayudamos a inmobiliarias a responder, calificar y ordenar esos leads automáticamente. ¿Te sirve que te muestre un ejemplo corto?",
+    "email_subject": "Consulta por leads de portales",
+    "email_body": "Hola, ¿cómo estás? Vi actividad de Demo Propiedades en CABA y quería acercarte una idea concreta para mejorar la respuesta a consultas de portales. En Optima implementamos agentes de IA para responder, calificar y ordenar leads antes de pasarlos al asesor. Si te interesa, te puedo mostrar un ejemplo aplicado a inmobiliarias.",
+    "linkedin_dm": "Hola, vi Demo Propiedades y me pareció interesante el movimiento que tienen en CABA. Estoy trabajando en Optima con agentes de IA para inmobiliarias, enfocados en respuesta y calificación de leads. ¿Te puedo compartir un ejemplo breve?",
+    "personalization_notes": [],
+    "risk_notes": [],
+    "status": "OUTREACH_DRAFTED",
+    "created_at": "2026-05-23T23:01:45.558Z",
+    "updated_at": "2026-05-23T23:01:45.558Z"
+  },
+  {
+    "draft_id": "premium-homes-caba-1779584920837",
+    "prospect_id": "premium-homes-caba",
+    "company_name": "Premium Homes CABA",
+    "angle_used": "Qualify premium inquiries without losing advisory tone",
+    "whatsapp": "Hola, ¿cómo estás? Vi que Premium Homes CABA tiene bastante actividad en propiedades premium y varios canales de consulta abiertos. Estoy trabajando en Optima con agentes de IA para inmobiliarias: responden consultas, califican al interesado y dejan listo el próximo paso para el asesor. Creo que podría encajar bien sin perder el trato personalizado. ¿Te puedo compartir un ejemplo corto?",
+    "email_subject": "Consultas de portales para propiedades premium",
+    "email_body": "Hola, ¿cómo estás? Vi la presencia de Premium Homes CABA y el volumen de propiedades publicadas en segmentos de mayor valor.\\n\\nEn Optima estamos armando agentes de IA para inmobiliarias que ayudan a responder consultas de portales y WhatsApp, calificar al interesado y ordenar el seguimiento antes de que llegue al asesor.\\n\\nLa idea no es reemplazar el trato personalizado, sino filtrar mejor y responder más rápido cuando entran varias consultas por distintos canales.\\n\\n¿Te sirve que te muestre un ejemplo aplicado a una inmobiliaria con inventario premium?",
+    "linkedin_dm": "Hola, vi Premium Homes CABA y me llamó la atención el volumen de propiedades premium que manejan. Estoy trabajando en Optima con agentes de IA para inmobiliarias, enfocados en responder y calificar consultas de portales/WhatsApp sin perder el trato personalizado. ¿Te puedo compartir un ejemplo breve?",
+    "personalization_notes": ["Referenced premium inventory", "Kept CRM claim exploratory"],
+    "risk_notes": ["Do not claim exact lead volume"],
+    "status": "APPROVED",
+    "created_at": "2026-05-24T01:08:40.837Z",
+    "updated_at": "2026-05-24T01:20:40.837Z",
+    "approved_at": "2026-05-24T01:20:40.837Z"
+  },
+  {
+    "draft_id": "urban-norte-realty-1779584920838",
+    "prospect_id": "urban-norte-realty",
+    "company_name": "Urban Norte Realty",
+    "angle_used": "Centralize and qualify portal inquiries",
+    "whatsapp": "Hola, ¿cómo estás? Vi que Urban Norte Realty aparece con actividad en Zona Norte y usa WhatsApp como canal visible de contacto. En Optima estamos creando agentes de IA para inmobiliarias que responden consultas de portales, califican al interesado y ordenan el seguimiento. ¿Te puedo mostrar un ejemplo corto?",
+    "email_subject": "Ordenar consultas de portales y WhatsApp",
+    "email_body": "Hola, ¿cómo estás? Vi la actividad de Urban Norte Realty en Zona Norte y quería acercarte una idea para ordenar mejor consultas de portales y WhatsApp.\\n\\nOptima ayuda a responder más rápido, calificar interesados y dejar el próximo paso listo para el asesor.\\n\\n¿Te sirve que te comparta un ejemplo breve?",
+    "linkedin_dm": "Hola, vi Urban Norte Realty y la actividad que tienen en Zona Norte. Estoy trabajando en Optima con agentes de IA para inmobiliarias, enfocados en responder y calificar consultas de portales y WhatsApp. ¿Te puedo compartir un ejemplo corto?",
+    "personalization_notes": ["Referenced Zona Norte", "Focused on WhatsApp-first flow"],
+    "risk_notes": ["Avoid saying they do not use a CRM"],
+    "status": "OUTREACH_DRAFTED",
+    "created_at": "2026-05-24T01:08:40.838Z",
+    "updated_at": "2026-05-24T01:08:40.838Z"
+  }
+]

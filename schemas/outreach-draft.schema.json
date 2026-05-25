@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Outreach Draft",
+  "type": "object",
+  "required": [
+    "prospect_id",
+    "company_name",
+    "whatsapp",
+    "email_subject",
+    "email_body",
+    "linkedin_dm",
+    "status"
+  ],
+  "properties": {
+    "draft_id": { "type": "string" },
+    "prospect_id": { "type": "string" },
+    "company_name": { "type": "string" },
+    "angle_used": { "type": "string" },
+    "whatsapp": { "type": "string" },
+    "email_subject": { "type": "string" },
+    "email_body": { "type": "string" },
+    "linkedin_dm": { "type": "string" },
+    "personalization_notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risk_notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["OUTREACH_DRAFTED", "REVIEWED", "APPROVED", "REJECTED", "SENT"]
+    },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

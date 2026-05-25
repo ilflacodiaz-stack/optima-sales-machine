@@ -1,0 +1,15 @@
+{
+  "name": "optima-sales-machine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node tools/web-app.mjs",
+    "api": "node tools/state-api.mjs",
+    "validate:openclaw": "node openclaw/validate-openclaw-package.mjs",
+    "pipeline": "node tools/daily-pipeline-runner.mjs --scout-source=sources/zonaprop-caba-candidates.json --research-hints=sources/james-research-hints.json --limit=3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

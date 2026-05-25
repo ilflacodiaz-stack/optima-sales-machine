@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Prospect",
+  "type": "object",
+  "required": [
+    "prospect_id",
+    "company_name",
+    "source",
+    "status"
+  ],
+  "properties": {
+    "prospect_id": { "type": "string" },
+    "company_name": { "type": "string" },
+    "source": { "type": "string" },
+    "source_url": { "type": "string" },
+    "location": { "type": "string" },
+    "listing_count_estimate": { "type": ["integer", "null"] },
+    "contact_paths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "why_flagged": { "type": "string" },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["NEW", "SCOUTED", "RESEARCH_PENDING", "RESEARCHED", "QUALIFIED", "OUTREACH_DRAFTED", "REVIEWED", "SENT", "REPLIED", "DEMO_BOOKED", "CLOSED"]
+    },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}
