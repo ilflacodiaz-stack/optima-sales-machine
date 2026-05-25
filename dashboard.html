@@ -1,203 +1,335 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0a0a">
     <title>Optima Sales Machine</title>
+    <meta name="description" content="Multi-agent sales prospecting system for inmobiliaria outreach">
     <link rel="stylesheet" href="dashboard.css">
   </head>
   <body>
     <main class="dashboard">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Sprint 4</p>
-          <h1>Optima Sales Machine</h1>
-          <p class="topbar-subtitle">OpenClaw-native prospecting system for inmobiliaria outreach.</p>
-        </div>
-        <div class="status-pill" id="lastUpdated">Loading state</div>
-      </header>
-
-      <section class="proof-strip" aria-label="System proof points">
-        <article>
-          <strong>OpenClaw Native</strong>
-          <span>4 registered agents</span>
-        </article>
-        <article>
-          <strong>Shared State</strong>
-          <span>prospects, briefs, drafts, outcomes</span>
-        </article>
-        <article>
-          <strong>Dashboard First</strong>
-          <span>portfolio-ready control surface</span>
-        </article>
-      </section>
-
-      <section class="metrics" aria-label="Pipeline metrics">
-        <article>
-          <span id="metricProspects">0</span>
-          <p>Prospects</p>
-        </article>
-        <article>
-          <span id="metricResearched">0</span>
-          <p>Research briefs</p>
-        </article>
-        <article>
-          <span id="metricQualified">0</span>
-          <p>Qualified</p>
-        </article>
-        <article>
-          <span id="metricDrafts">0</span>
-          <p>Drafts ready</p>
-        </article>
-      </section>
-
-      <section class="case-study" aria-label="Case study tracker">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Month One</p>
-            <h2>Case Study Tracker</h2>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand">
+            <div class="brand-logo">O</div>
+            <span class="brand-name">Optima</span>
+            <span class="brand-tag">v0.1</span>
           </div>
-          <button id="copyCaseStudyBtn" type="button">Copy summary</button>
         </div>
-        <div class="funnel-grid">
-          <article>
-            <span id="metricReviewQueue">0</span>
-            <p>Ready for review</p>
-          </article>
-          <article>
-            <span id="metricApproved">0</span>
-            <p>Approved drafts</p>
-          </article>
-          <article>
-            <span id="metricMeetings">0</span>
-            <p>Meetings booked</p>
-          </article>
-          <article>
-            <span id="metricMeetingRate">0%</span>
-            <p>Prospect to meeting</p>
-          </article>
-        </div>
-        <p class="case-note" id="caseStudyNote">Loading case study metrics.</p>
-      </section>
 
-      <section class="pipeline" aria-label="Agent pipeline">
-        <article>
-          <small>01</small>
-          <strong>Scout Agent</strong>
-          <p>Finds candidate inmobiliarias and writes prospect records.</p>
-        </article>
-        <div class="connector"></div>
-        <article>
-          <small>02</small>
-          <strong>Research Agent</strong>
-          <p>Enriches prospects, detects CRM signals, and scores fit.</p>
-        </article>
-        <div class="connector"></div>
-        <article>
-          <small>03</small>
-          <strong>Outreach Agent</strong>
-          <p>Drafts WhatsApp, email, and LinkedIn messages for review.</p>
-        </article>
-      </section>
-
-      <section class="command-center" aria-label="Agent command center">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">OpenClaw Native Team</p>
-            <h2>Agent Command Center</h2>
+        <nav class="sidebar-nav">
+          <div class="nav-section">
+            <div class="nav-section-label">Overview</div>
+            <button class="nav-item active" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+              </svg>
+              Dashboard
+            </button>
+            <button class="nav-item" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+              </svg>
+              Prospects
+              <span class="nav-item-badge" id="navProspectCount">0</span>
+            </button>
           </div>
-          <div class="command-status" id="commandStatus">Ready when State API is connected</div>
-        </div>
-        <div class="agent-grid">
-          <article class="agent-card">
-            <div class="agent-card-header">
-              <span>01</span>
-              <strong>Scout</strong>
-            </div>
-            <p>Monitors source lists and writes SCOUTED prospects.</p>
-            <button data-runner="scout" type="button">Run Scout</button>
-          </article>
-          <article class="agent-card">
-            <div class="agent-card-header">
-              <span>02</span>
-              <strong>James Research</strong>
-            </div>
-            <p>Turns scouted prospects into scored research briefs.</p>
-            <button data-runner="research" type="button">Run Research</button>
-          </article>
-          <article class="agent-card">
-            <div class="agent-card-header">
-              <span>03</span>
-              <strong>Outreach</strong>
-            </div>
-            <p>Drafts WhatsApp, email, and LinkedIn messages.</p>
-            <button data-runner="outreach" type="button">Run Outreach</button>
-          </article>
-          <article class="agent-card orchestrator">
-            <div class="agent-card-header">
-              <span>04</span>
-              <strong>Orchestrator</strong>
-            </div>
-            <p>Runs Scout -> James -> Outreach and prepares the daily review.</p>
-            <button data-runner="pipeline" type="button">Run Daily Sequence</button>
-          </article>
-        </div>
-      </section>
 
-      <section class="runs-panel" aria-label="Daily agent runs">
-        <div class="section-heading">
-          <h2>Daily Runs</h2>
-        </div>
-        <div id="dailyRuns"></div>
-      </section>
-
-      <section class="workspace">
-        <aside class="prospect-list">
-          <div class="section-heading">
-            <h2>Prospects</h2>
-            <button id="refreshBtn" type="button">Refresh</button>
+          <div class="nav-section">
+            <div class="nav-section-label">Agents</div>
+            <button class="nav-item" type="button" data-runner="scout">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+              Scout
+            </button>
+            <button class="nav-item" type="button" data-runner="research">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+              </svg>
+              Research
+            </button>
+            <button class="nav-item" type="button" data-runner="outreach">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+              </svg>
+              Outreach
+            </button>
           </div>
-          <form class="prospect-form" id="prospectForm">
-            <label>
-              Company
-              <input id="companyInput" name="company_name" type="text" placeholder="Inmobiliaria name" required>
-            </label>
-            <label>
-              Location
-              <input id="locationInput" name="location" type="text" placeholder="CABA / GBA / Argentina">
-            </label>
-            <label>
-              Why flagged
-              <textarea id="whyInput" name="why_flagged" rows="3" placeholder="What makes this worth researching?"></textarea>
-            </label>
-            <div class="form-row">
-              <label>
-                Source
-                <input id="sourceInput" name="source" type="text" value="manual dashboard">
-              </label>
-              <label>
-                Listings
-                <input id="listingsInput" name="listing_count_estimate" type="number" min="0" placeholder="35">
-              </label>
-            </div>
-            <div class="checkbox-row" aria-label="Contact paths">
-              <label><input name="contact_paths" type="checkbox" value="website"> Website</label>
-              <label><input name="contact_paths" type="checkbox" value="whatsapp"> WhatsApp</label>
-              <label><input name="contact_paths" type="checkbox" value="linkedin"> LinkedIn</label>
-            </div>
-            <button class="submit-btn" type="submit">Add prospect</button>
-            <p class="form-status" id="formStatus">State API: checking</p>
-          </form>
-          <div id="prospectList"></div>
-        </aside>
 
-        <section class="detail-panel" id="detailPanel">
-          <div class="empty-state">
-            <h2>Select a prospect</h2>
-            <p>Choose a prospect to inspect the multi-agent handoff.</p>
+          <div class="nav-section">
+            <div class="nav-section-label">Pipeline</div>
+            <div class="pipeline-mini">
+              <div class="pipeline-step">
+                <div class="pipeline-dot scout"></div>
+                <span class="pipeline-step-label">Scout finds leads</span>
+              </div>
+              <div class="pipeline-connector"></div>
+              <div class="pipeline-step">
+                <div class="pipeline-dot research"></div>
+                <span class="pipeline-step-label">Research qualifies</span>
+              </div>
+              <div class="pipeline-connector"></div>
+              <div class="pipeline-step">
+                <div class="pipeline-dot outreach"></div>
+                <span class="pipeline-step-label">Outreach drafts</span>
+              </div>
+            </div>
           </div>
-        </section>
-      </section>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="status-indicator" id="sidebarStatus">
+            <div class="status-dot offline" id="statusDot"></div>
+            <span id="statusText">Checking connection</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Toggle navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+            <span class="topbar-title">Command Center</span>
+          </div>
+          <div class="topbar-right">
+            <button class="topbar-btn" id="refreshBtn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+              <span>Refresh</span>
+            </button>
+            <button class="topbar-btn topbar-btn-primary" id="runPipelineBtn" data-runner="pipeline" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+              </svg>
+              <span>Run Pipeline</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="content-area">
+          <!-- Metrics -->
+          <section class="metrics-grid" aria-label="Pipeline metrics">
+            <article class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Prospects</span>
+                <div class="metric-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-value" id="metricProspects">0</div>
+              <div class="metric-change">Surfaced by Scout</div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Research Briefs</span>
+                <div class="metric-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-value" id="metricResearched">0</div>
+              <div class="metric-change">Enriched by James</div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Qualified</span>
+                <div class="metric-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-value" id="metricQualified">0</div>
+              <div class="metric-change">Ready for outreach</div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Drafts Ready</span>
+                <div class="metric-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-value" id="metricDrafts">0</div>
+              <div class="metric-change">Pending review</div>
+            </article>
+          </section>
+
+          <!-- Agent Command Center -->
+          <section class="section" aria-label="Agent command center">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title">Agent Command Center</h2>
+                <p class="section-subtitle" id="commandStatus">Checking connection status</p>
+              </div>
+            </div>
+            <div class="agent-grid">
+              <article class="agent-card">
+                <div class="agent-card-header">
+                  <span class="agent-number">01</span>
+                  <span class="agent-name">Scout</span>
+                  <div class="agent-status" id="scoutStatus"></div>
+                </div>
+                <p class="agent-desc">Monitors source lists and identifies ICP-fit inmobiliarias.</p>
+                <button class="agent-btn" data-runner="scout" type="button">Run Scout</button>
+              </article>
+              <article class="agent-card">
+                <div class="agent-card-header">
+                  <span class="agent-number">02</span>
+                  <span class="agent-name">James Research</span>
+                  <div class="agent-status" id="researchStatus"></div>
+                </div>
+                <p class="agent-desc">Enriches prospects with CRM signals, pain points, and scores.</p>
+                <button class="agent-btn" data-runner="research" type="button">Run Research</button>
+              </article>
+              <article class="agent-card">
+                <div class="agent-card-header">
+                  <span class="agent-number">03</span>
+                  <span class="agent-name">Outreach</span>
+                  <div class="agent-status" id="outreachStatus"></div>
+                </div>
+                <p class="agent-desc">Drafts personalized WhatsApp, email, and LinkedIn messages.</p>
+                <button class="agent-btn" data-runner="outreach" type="button">Run Outreach</button>
+              </article>
+              <article class="agent-card">
+                <div class="agent-card-header">
+                  <span class="agent-number">04</span>
+                  <span class="agent-name">Orchestrator</span>
+                  <div class="agent-status" id="orchestratorStatus"></div>
+                </div>
+                <p class="agent-desc">Coordinates daily pipeline: Scout, Research, then Outreach.</p>
+                <button class="agent-btn" data-runner="pipeline" type="button">Run Full Pipeline</button>
+              </article>
+            </div>
+          </section>
+
+          <!-- Daily Runs -->
+          <section class="section" aria-label="Daily runs">
+            <div class="section-header">
+              <h2 class="section-title">Recent Runs</h2>
+            </div>
+            <div class="runs-grid" id="dailyRuns">
+              <p class="muted">Loading runs...</p>
+            </div>
+          </section>
+
+          <!-- Case Study Tracker -->
+          <section class="case-study-section" aria-label="Case study tracker">
+            <div class="case-study-header">
+              <div class="case-study-header-content">
+                <span class="eyebrow">Month One</span>
+                <h2>Case Study Tracker</h2>
+              </div>
+              <button class="topbar-btn" id="copyCaseStudyBtn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:14px;height:14px">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
+                </svg>
+                <span>Copy Summary</span>
+              </button>
+            </div>
+            <div class="case-study-content">
+              <div class="funnel-grid">
+                <article class="funnel-card">
+                  <div class="funnel-value" id="metricReviewQueue">0</div>
+                  <div class="funnel-label">Ready for review</div>
+                </article>
+                <article class="funnel-card">
+                  <div class="funnel-value" id="metricApproved">0</div>
+                  <div class="funnel-label">Approved drafts</div>
+                </article>
+                <article class="funnel-card">
+                  <div class="funnel-value" id="metricMeetings">0</div>
+                  <div class="funnel-label">Meetings booked</div>
+                </article>
+                <article class="funnel-card">
+                  <div class="funnel-value" id="metricMeetingRate">0%</div>
+                  <div class="funnel-label">Prospect to meeting</div>
+                </article>
+              </div>
+              <p class="case-note" id="caseStudyNote">Loading metrics...</p>
+            </div>
+          </section>
+
+          <!-- Workspace -->
+          <section class="workspace" aria-label="Prospect workspace">
+            <!-- Prospect List Panel -->
+            <div class="prospect-panel">
+              <div class="prospect-panel-header">
+                <span class="prospect-panel-title">Prospects</span>
+                <div class="prospect-panel-actions">
+                  <button class="icon-btn" id="toggleFormBtn" type="button" title="Add prospect">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <form class="prospect-form" id="prospectForm" style="display:none">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="companyInput">Company</label>
+                    <input class="form-input" id="companyInput" name="company_name" type="text" placeholder="Inmobiliaria name" required>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="locationInput">Location</label>
+                      <input class="form-input" id="locationInput" name="location" type="text" placeholder="CABA">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="listingsInput">Listings</label>
+                      <input class="form-input" id="listingsInput" name="listing_count_estimate" type="number" min="0" placeholder="35">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="whyInput">Why flagged</label>
+                    <textarea class="form-textarea" id="whyInput" name="why_flagged" rows="2" placeholder="What makes this worth researching?"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Contact paths</label>
+                    <div class="checkbox-group">
+                      <label class="checkbox-label"><input name="contact_paths" type="checkbox" value="website"> Website</label>
+                      <label class="checkbox-label"><input name="contact_paths" type="checkbox" value="whatsapp"> WhatsApp</label>
+                      <label class="checkbox-label"><input name="contact_paths" type="checkbox" value="linkedin"> LinkedIn</label>
+                    </div>
+                  </div>
+                  <input id="sourceInput" name="source" type="hidden" value="manual dashboard">
+                  <div class="form-actions">
+                    <span class="form-status" id="formStatus">Checking API</span>
+                    <button class="submit-btn" type="submit">Add Prospect</button>
+                  </div>
+                </div>
+              </form>
+
+              <div class="prospect-list" id="prospectList">
+                <p class="muted" style="padding:12px">Loading prospects...</p>
+              </div>
+            </div>
+
+            <!-- Detail Panel -->
+            <section class="detail-panel" id="detailPanel">
+              <div class="empty-state">
+                <h2>Select a prospect</h2>
+                <p>Choose a prospect to view the multi-agent workflow.</p>
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
     </main>
 
     <script src="dashboard.js"></script>

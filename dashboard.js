@@ -4,11 +4,11 @@ const state = {
   outreach: [],
   runs: [],
   selectedId: "",
-  apiOnline: false
+  apiOnline: false,
+  formVisible: false
 };
 
 const elements = {
-  lastUpdated: document.querySelector("#lastUpdated"),
   metricProspects: document.querySelector("#metricProspects"),
   metricResearched: document.querySelector("#metricResearched"),
   metricQualified: document.querySelector("#metricQualified"),
@@ -25,7 +25,13 @@ const elements = {
   detailPanel: document.querySelector("#detailPanel"),
   refreshBtn: document.querySelector("#refreshBtn"),
   prospectForm: document.querySelector("#prospectForm"),
-  formStatus: document.querySelector("#formStatus")
+  formStatus: document.querySelector("#formStatus"),
+  toggleFormBtn: document.querySelector("#toggleFormBtn"),
+  navProspectCount: document.querySelector("#navProspectCount"),
+  statusDot: document.querySelector("#statusDot"),
+  statusText: document.querySelector("#statusText"),
+  sidebar: document.querySelector("#sidebar"),
+  mobileNavToggle: document.querySelector("#mobileNavToggle")
 };
 
 const API_BASE = window.OPTIMA_API_BASE || (
@@ -108,18 +114,18 @@ function statusTag(prospect) {
   const research = findResearch(prospect.prospect_id);
   const outreach = findOutreach(prospect.prospect_id);
 
-  if (outreach?.status === "APPROVED") return ["APPROVED", ""];
-  if (outreach?.status === "SENT") return ["SENT", ""];
-  if (outreach?.status === "REPLIED") return ["REPLIED", ""];
-  if (outreach?.status === "FOLLOW_UP_DUE") return ["FOLLOW_UP_DUE", "warning"];
-  if (outreach?.status === "MEETING_BOOKED") return ["MEETING_BOOKED", ""];
-  if (outreach?.status === "NOT_INTERESTED") return ["NOT_INTERESTED", "danger"];
+  if (outreach?.status === "APPROVED") return ["APPROVED", "success"];
+  if (outreach?.status === "SENT") return ["SENT", "info"];
+  if (outreach?.status === "REPLIED") return ["REPLIED", "success"];
+  if (outreach?.status === "FOLLOW_UP_DUE") return ["FOLLOW UP", "warning"];
+  if (outreach?.status === "MEETING_BOOKED") return ["MEETING", "success"];
+  if (outreach?.status === "NOT_INTERESTED") return ["CLOSED", "danger"];
   if (outreach?.status === "REJECTED") return ["REJECTED", "danger"];
-  if (outreach) return [outreach.status || "OUTREACH_DRAFTED", ""];
-  if (research?.status === "QUALIFIED") return ["QUALIFIED", ""];
-  if (research?.status === "NEEDS_REVIEW") return ["NEEDS_REVIEW", "warning"];
+  if (outreach) return [outreach.status || "DRAFTED", "info"];
+  if (research?.status === "QUALIFIED") return ["QUALIFIED", "success"];
+  if (research?.status === "NEEDS_REVIEW") return ["REVIEW", "warning"];
   if (research?.status === "REJECTED") return ["REJECTED", "danger"];
-  return [prospect.status || "SCOUTED", "warning"];
+  return [prospect.status || "SCOUTED", "default"];
 }
 
 function render() {
@@ -129,29 +135,61 @@ function render() {
   renderRuns();
   renderProspects();
   renderDetails();
-  elements.lastUpdated.textContent = `Updated ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+  updateNavCount();
+}
+
+function updateNavCount() {
+  if (elements.navProspectCount) {
+    elements.navProspectCount.textContent = state.prospects.length;
+  }
 }
 
 function renderApiStatus(message = "") {
-  elements.formStatus.textContent = message || (state.apiOnline
-    ? "State API: connected"
+  const statusMessage = message || (state.apiOnline
+    ? "Connected to State API"
     : isStaticDemo
-      ? "Portfolio demo: bundled state. Connect Supabase/API to enable writes."
-      : "State API: offline. Start it to add prospects.");
-  elements.prospectForm.classList.toggle("disabled", !state.apiOnline);
-  elements.prospectForm.querySelectorAll("input, textarea, button").forEach((field) => {
-    field.disabled = !state.apiOnline;
-  });
+      ? "Demo mode - showing bundled state"
+      : "State API offline");
+
+  if (elements.formStatus) {
+    elements.formStatus.textContent = statusMessage;
+  }
+
+  if (elements.commandStatus) {
+    elements.commandStatus.textContent = state.apiOnline
+      ? "All agents ready. Run individual agents or full pipeline."
+      : isStaticDemo
+        ? "Demo mode - agents run locally or with production API"
+        : "Connect State API to enable agent runs";
+  }
+
+  if (elements.statusDot) {
+    elements.statusDot.classList.toggle("offline", !state.apiOnline);
+  }
+
+  if (elements.statusText) {
+    elements.statusText.textContent = state.apiOnline ? "API Connected" : "Demo Mode";
+  }
+
+  if (elements.prospectForm) {
+    elements.prospectForm.classList.toggle("disabled", !state.apiOnline);
+    elements.prospectForm.querySelectorAll("input, textarea, button").forEach((field) => {
+      field.disabled = !state.apiOnline;
+    });
+  }
+
   document.querySelectorAll("[data-runner]").forEach((button) => {
     button.disabled = !state.apiOnline;
   });
-  if (elements.commandStatus && !message) {
-    elements.commandStatus.textContent = state.apiOnline
-      ? "State API connected. Agents can run from dashboard."
-      : isStaticDemo
-        ? "Vercel demo mode. Agent runs are shown locally or with a production API."
-        : "Start the State API to run agents.";
-  }
+
+  // Update agent status indicators
+  const agentStatuses = ["scoutStatus", "researchStatus", "outreachStatus", "orchestratorStatus"];
+  agentStatuses.forEach((id) => {
+    const el = document.querySelector(`#${id}`);
+    if (el) {
+      el.classList.toggle("ready", state.apiOnline);
+    }
+  });
 }
 
 function renderMetrics() {
@@ -192,12 +230,12 @@ function renderCaseStudy() {
   elements.metricApproved.textContent = stats.approved;
   elements.metricMeetings.textContent = stats.meetings;
   elements.metricMeetingRate.textContent = stats.meetingRate;
-  elements.caseStudyNote.textContent = `${stats.prospects} surfaced, ${stats.qualified} qualified (${stats.qualificationRate}), ${stats.sent} sent or progressed, ${stats.meetings} meetings booked.`;
+  elements.caseStudyNote.textContent = `${stats.prospects} surfaced, ${stats.qualified} qualified (${stats.qualificationRate}), ${stats.sent} progressed, ${stats.meetings} meetings booked.`;
 }
 
 function buildCaseStudySummary() {
   const stats = getCaseStudyStats();
-  return `Optima Sales Machine - Sprint 4 case study
+  return `Optima Sales Machine - Case Study
 
 Multi-agent system:
 - Scout finds ICP-fit inmobiliarias
@@ -217,28 +255,52 @@ Current metrics:
 
 function renderRuns() {
   if (!state.runs.length) {
-    elements.dailyRuns.innerHTML = `<p class="muted">No Scout runs logged yet.</p>`;
+    elements.dailyRuns.innerHTML = `<p class="muted">No agent runs logged yet.</p>`;
     return;
   }
 
-  elements.dailyRuns.innerHTML = state.runs.slice().reverse().slice(0, 3).map((run) => `
-    <article class="run-card">
-      <div>
-        <strong>${escapeHtml(run.run_type || "RUN")}</strong>
-        <p>${escapeHtml(run.source_name || "Unknown source")}</p>
-      </div>
-      <div class="run-stats">
-        <span>${escapeHtml(run.candidates_seen || 0)} seen</span>
-        <span>${escapeHtml(run.prospects_added?.length || 0)} added</span>
-        <span>${escapeHtml(run.duplicates_skipped?.length || 0)} duplicates</span>
-      </div>
-    </article>
-  `).join("");
+  elements.dailyRuns.innerHTML = state.runs.slice().reverse().slice(0, 3).map((run) => {
+    const runType = (run.run_type || "RUN").toLowerCase();
+    const time = run.created_at ? formatRelativeTime(run.created_at) : "";
+    return `
+      <article class="run-card">
+        <div class="run-header">
+          <div class="run-type">
+            <span class="run-type-dot ${runType}"></span>
+            ${escapeHtml(run.run_type || "RUN")}
+          </div>
+          <span class="run-time">${escapeHtml(time)}</span>
+        </div>
+        <p class="run-source">${escapeHtml(run.source_name || run.agent_base || "Agent run")}</p>
+        <div class="run-stats">
+          ${run.candidates_seen ? `<span class="run-stat"><strong>${escapeHtml(run.candidates_seen)}</strong> seen</span>` : ""}
+          ${run.prospects_added ? `<span class="run-stat"><strong>${escapeHtml(run.prospects_added.length)}</strong> added</span>` : ""}
+          ${run.research_added ? `<span class="run-stat"><strong>${escapeHtml(run.research_added.length)}</strong> briefs</span>` : ""}
+          ${run.drafts_added ? `<span class="run-stat"><strong>${escapeHtml(run.drafts_added.length)}</strong> drafts</span>` : ""}
+          ${run.duplicates_skipped ? `<span class="run-stat"><strong>${escapeHtml(run.duplicates_skipped.length)}</strong> skipped</span>` : ""}
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function formatRelativeTime(dateString) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diff = now - date;
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
+
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  return `${days}d ago`;
 }
 
 function renderProspects() {
   if (!state.prospects.length) {
-    elements.prospectList.innerHTML = `<p class="muted">No prospects yet. Add one with the state CLI.</p>`;
+    elements.prospectList.innerHTML = `<p class="muted" style="padding:12px">No prospects yet. Add one to get started.</p>`;
     return;
   }
 
@@ -246,10 +308,10 @@ function renderProspects() {
     const [tag, tone] = statusTag(prospect);
     return `
       <button class="prospect-card ${prospect.prospect_id === state.selectedId ? "active" : ""}" data-id="${escapeHtml(prospect.prospect_id)}" type="button">
-        <strong>${escapeHtml(prospect.company_name)}</strong>
+        <div class="prospect-name">${escapeHtml(prospect.company_name)}</div>
         <div class="prospect-meta">
-          <span>${escapeHtml(prospect.location || "Unknown location")}</span>
-          <span>${escapeHtml(prospect.listing_count_estimate ? `${prospect.listing_count_estimate} listings` : "No listing count")}</span>
+          <span class="prospect-meta-item">${escapeHtml(prospect.location || "Unknown")}</span>
+          <span class="prospect-meta-item">${escapeHtml(prospect.listing_count_estimate ? `${prospect.listing_count_estimate} listings` : "")}</span>
           <span class="tag ${tone}">${escapeHtml(tag)}</span>
         </div>
       </button>
@@ -270,7 +332,7 @@ function renderDetails() {
     elements.detailPanel.innerHTML = `
       <div class="empty-state">
         <h2>Select a prospect</h2>
-        <p>Choose a prospect to inspect the multi-agent handoff.</p>
+        <p>Choose a prospect to view the multi-agent workflow.</p>
       </div>
     `;
     return;
@@ -282,65 +344,75 @@ function renderDetails() {
 
   elements.detailPanel.innerHTML = `
     <div class="detail-header">
-      <div>
-        <p class="eyebrow">${escapeHtml(prospect.source || "Source")}</p>
-        <h2>${escapeHtml(prospect.company_name)}</h2>
-        <p class="muted">${escapeHtml(prospect.why_flagged || "No scout note yet.")}</p>
+      <div class="detail-header-content">
+        <div class="detail-eyebrow">
+          <span class="detail-source">${escapeHtml(prospect.source || "Source")}</span>
+        </div>
+        <h2 class="detail-title">${escapeHtml(prospect.company_name)}</h2>
+        <p class="detail-subtitle">${escapeHtml(prospect.why_flagged || "No scout note yet.")}</p>
       </div>
-      <div class="score">${escapeHtml(score)}</div>
+      <div class="score-badge">${escapeHtml(score)}</div>
     </div>
 
-    <div class="detail-grid">
-      ${infoBlock("Scout Output", [
-        ["Location", prospect.location],
-        ["Listings", prospect.listing_count_estimate || "Unknown"],
-        ["Contacts", prospect.contact_paths?.join(", ") || "None"],
-        ["Confidence", prospect.confidence]
-      ])}
+    <div class="detail-content">
+      <div class="detail-grid">
+        ${infoCard("Scout Output", [
+          ["Location", prospect.location],
+          ["Listings", prospect.listing_count_estimate || "Unknown"],
+          ["Contacts", prospect.contact_paths?.join(", ") || "None"],
+          ["Confidence", prospect.confidence]
+        ])}
 
-      ${research ? infoBlock("Research Brief", [
-        ["Summary", research.summary],
-        ["Activity", research.estimated_activity],
-        ["CRM Signals", research.crm_signals?.join(", ") || "None"],
-        ["Competitors", research.competitor_signals?.join(", ") || "None"],
-        ["Angle", research.outreach_angle]
-      ]) : missingBlock("Research Brief", "Waiting for Research Agent.")}
+        ${research ? infoCard("Research Brief", [
+          ["Summary", research.summary],
+          ["Activity", research.estimated_activity],
+          ["CRM Signals", research.crm_signals?.join(", ") || "None"],
+          ["Competitors", research.competitor_signals?.join(", ") || "None"],
+          ["Angle", research.outreach_angle]
+        ]) : emptyCard("Research Brief", "Waiting for Research Agent.")}
 
-      ${research ? listBlock("Pain Points", research.pain_points) : missingBlock("Pain Points", "Research Agent has not written pain points yet.")}
-      ${research ? listBlock("Sources", research.sources?.length ? research.sources : ["No sources saved yet."]) : missingBlock("Sources", "Research Agent has not saved sources yet.")}
-    </div>
+        ${research ? listCard("Pain Points", research.pain_points) : emptyCard("Pain Points", "Research Agent has not written pain points yet.")}
+        ${research ? listCard("Sources", research.sources?.length ? research.sources : ["No sources saved yet."]) : emptyCard("Sources", "Research Agent has not saved sources yet.")}
+      </div>
 
-    <div class="drafts">
-      ${outreach ? renderDrafts(outreach) : missingBlock("Outreach Drafts", "Waiting for Outreach Agent.")}
+      <div class="drafts-section">
+        ${outreach ? renderDrafts(outreach) : emptyCard("Outreach Drafts", "Waiting for Outreach Agent.")}
+      </div>
     </div>
   `;
 }
 
-function infoBlock(title, rows) {
+function infoCard(title, rows) {
   return `
-    <article class="info-block">
-      <h3>${escapeHtml(title)}</h3>
-      ${rows.map(([label, value]) => `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value || "Unknown")}</p>`).join("")}
+    <article class="info-card">
+      <h3 class="info-card-title">${escapeHtml(title)}</h3>
+      <div class="info-card-content">
+        ${rows.map(([label, value]) => `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value || "Unknown")}</p>`).join("")}
+      </div>
     </article>
   `;
 }
 
-function listBlock(title, items = []) {
+function listCard(title, items = []) {
   return `
-    <article class="info-block">
-      <h3>${escapeHtml(title)}</h3>
-      <ul>
-        ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-      </ul>
+    <article class="info-card">
+      <h3 class="info-card-title">${escapeHtml(title)}</h3>
+      <div class="info-card-content">
+        <ul>
+          ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+      </div>
     </article>
   `;
 }
 
-function missingBlock(title, message) {
+function emptyCard(title, message) {
   return `
-    <article class="info-block">
-      <h3>${escapeHtml(title)}</h3>
-      <p>${escapeHtml(message)}</p>
+    <article class="info-card">
+      <h3 class="info-card-title">${escapeHtml(title)}</h3>
+      <div class="info-card-content">
+        <p>${escapeHtml(message)}</p>
+      </div>
     </article>
   `;
 }
@@ -353,54 +425,63 @@ function renderDrafts(draft) {
   const isFollowUpDue = draft.status === "FOLLOW_UP_DUE";
   const isMeetingBooked = draft.status === "MEETING_BOOKED";
   const isClosed = ["MEETING_BOOKED", "NOT_INTERESTED"].includes(draft.status);
+
   return `
-    <article class="draft-actions">
-      <div>
+    <div class="drafts-header">
+      <div class="drafts-header-left">
         <h3>Outreach Drafts</h3>
-        <p class="muted">Status: <strong>${escapeHtml(draft.status || "OUTREACH_DRAFTED")}</strong></p>
+        <p>Status: <strong>${escapeHtml(draft.status || "OUTREACH_DRAFTED")}</strong></p>
       </div>
-      <div class="draft-action-buttons">
-        <button class="approve-btn" data-action="approve-draft" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${isApproved || isSent || !state.apiOnline ? "disabled" : ""}>
+      <div class="draft-actions">
+        <button class="draft-btn primary" data-action="approve-draft" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${isApproved || isSent || !state.apiOnline ? "disabled" : ""}>
           ${isApproved || isSent ? "Approved" : "Approve"}
         </button>
-        <button class="reject-btn" data-action="reject-draft" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${isRejected || isSent || !state.apiOnline ? "disabled" : ""}>
+        <button class="draft-btn danger" data-action="reject-draft" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${isRejected || isSent || !state.apiOnline ? "disabled" : ""}>
           ${isRejected ? "Rejected" : "Reject"}
         </button>
-        <button class="sent-btn" data-action="mark-sent" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!isApproved || isSent || isRejected || !state.apiOnline ? "disabled" : ""}>
-          ${isSent || isReplied || isFollowUpDue ? "Sent" : "Mark sent"}
+        <button class="draft-btn" data-action="mark-sent" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!isApproved || isSent || isRejected || !state.apiOnline ? "disabled" : ""}>
+          ${isSent || isReplied || isFollowUpDue ? "Sent" : "Mark Sent"}
         </button>
-        <button class="reply-btn" data-action="mark-replied" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${(!isSent && !isFollowUpDue) || isReplied || isRejected || isClosed || !state.apiOnline ? "disabled" : ""}>
-          ${isReplied || isMeetingBooked ? "Replied" : "Set replied"}
+        <button class="draft-btn success" data-action="mark-replied" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${(!isSent && !isFollowUpDue) || isReplied || isRejected || isClosed || !state.apiOnline ? "disabled" : ""}>
+          ${isReplied || isMeetingBooked ? "Replied" : "Set Replied"}
         </button>
-        <button class="follow-btn" data-action="follow-up" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!isSent || isReplied || isFollowUpDue || isRejected || isClosed || !state.apiOnline ? "disabled" : ""}>
-          ${isFollowUpDue ? "Follow-up due" : "Follow up"}
+        <button class="draft-btn warning" data-action="follow-up" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!isSent || isReplied || isFollowUpDue || isRejected || isClosed || !state.apiOnline ? "disabled" : ""}>
+          ${isFollowUpDue ? "Follow-up Due" : "Follow Up"}
         </button>
       </div>
-    </article>
+    </div>
     ${renderOutcomeControls(draft)}
     ${renderMeetingControls(draft)}
-    <article class="draft-block">
-      <div class="draft-channel-heading">
-        <h3>WhatsApp</h3>
-        <button data-action="copy-draft" data-copy-text="${escapeHtml(displayRawText(draft.whatsapp || ""))}" type="button">Copy</button>
-      </div>
-      <p>${displayText(draft.whatsapp || "No WhatsApp draft yet.")}</p>
-    </article>
-    <article class="draft-block">
-      <div class="draft-channel-heading">
-        <h3>Email</h3>
-        <button data-action="copy-draft" data-copy-text="${escapeHtml(formatEmailCopy(draft))}" type="button">Copy</button>
-      </div>
-      <p><strong>${escapeHtml(draft.email_subject || "No subject")}</strong></p>
-      <p>${displayText(draft.email_body || "No email body yet.")}</p>
-    </article>
-    <article class="draft-block">
-      <div class="draft-channel-heading">
-        <h3>LinkedIn DM</h3>
-        <button data-action="copy-draft" data-copy-text="${escapeHtml(displayRawText(draft.linkedin_dm || ""))}" type="button">Copy</button>
-      </div>
-      <p>${displayText(draft.linkedin_dm || "No LinkedIn draft yet.")}</p>
-    </article>
+    <div class="draft-channels">
+      <article class="draft-channel">
+        <div class="draft-channel-header">
+          <h4>WhatsApp</h4>
+          <button class="copy-btn" data-action="copy-draft" data-copy-text="${escapeHtml(displayRawText(draft.whatsapp || ""))}" type="button">Copy</button>
+        </div>
+        <div class="draft-channel-content">
+          <p>${displayText(draft.whatsapp || "No WhatsApp draft yet.")}</p>
+        </div>
+      </article>
+      <article class="draft-channel">
+        <div class="draft-channel-header">
+          <h4>Email</h4>
+          <button class="copy-btn" data-action="copy-draft" data-copy-text="${escapeHtml(formatEmailCopy(draft))}" type="button">Copy</button>
+        </div>
+        <div class="draft-channel-content">
+          <p class="subject">${escapeHtml(draft.email_subject || "No subject")}</p>
+          <p>${displayText(draft.email_body || "No email body yet.")}</p>
+        </div>
+      </article>
+      <article class="draft-channel">
+        <div class="draft-channel-header">
+          <h4>LinkedIn</h4>
+          <button class="copy-btn" data-action="copy-draft" data-copy-text="${escapeHtml(displayRawText(draft.linkedin_dm || ""))}" type="button">Copy</button>
+        </div>
+        <div class="draft-channel-content">
+          <p>${displayText(draft.linkedin_dm || "No LinkedIn draft yet.")}</p>
+        </div>
+      </article>
+    </div>
   `;
 }
 
@@ -409,18 +490,16 @@ function renderOutcomeControls(draft) {
   if (!canLogOutcome && !draft.response_note) return "";
 
   return `
-    <article class="outcome-block">
-      <div>
-        <h3>Response Outcome</h3>
-        <p class="muted">${escapeHtml(draft.response_note || "No response note saved yet.")}</p>
-      </div>
+    <div class="outcome-block">
+      <h3>Response Outcome</h3>
+      <p>${escapeHtml(draft.response_note || "No response note saved yet.")}</p>
       <textarea data-role="response-note" rows="3" placeholder="Paste the reply or next-step note">${escapeHtml(draft.response_note || "")}</textarea>
-      <div class="draft-action-buttons">
-        <button class="sent-btn" data-action="save-note" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!state.apiOnline ? "disabled" : ""}>Save note</button>
-        <button class="reply-btn" data-action="meeting-booked" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!canLogOutcome || !state.apiOnline ? "disabled" : ""}>Meeting booked</button>
-        <button class="reject-btn" data-action="not-interested" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!canLogOutcome || !state.apiOnline ? "disabled" : ""}>Not interested</button>
+      <div class="draft-actions">
+        <button class="draft-btn" data-action="save-note" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!state.apiOnline ? "disabled" : ""}>Save Note</button>
+        <button class="draft-btn success" data-action="meeting-booked" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!canLogOutcome || !state.apiOnline ? "disabled" : ""}>Meeting Booked</button>
+        <button class="draft-btn danger" data-action="not-interested" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!canLogOutcome || !state.apiOnline ? "disabled" : ""}>Not Interested</button>
       </div>
-    </article>
+    </div>
   `;
 }
 
@@ -428,16 +507,14 @@ function renderMeetingControls(draft) {
   if (draft.status !== "MEETING_BOOKED") return "";
 
   return `
-    <article class="outcome-block">
-      <div>
-        <h3>Meeting Prep</h3>
-        <p class="muted">${escapeHtml(draft.meeting_details || "Add date, attendee, objective, and what to prepare.")}</p>
-      </div>
+    <div class="outcome-block">
+      <h3>Meeting Prep</h3>
+      <p>${escapeHtml(draft.meeting_details || "Add date, attendee, objective, and what to prepare.")}</p>
       <textarea data-role="meeting-details" rows="4" placeholder="Example: Tuesday 10:00. Goal: qualify lead volume and current CRM. Prep: show WhatsApp lead triage demo.">${escapeHtml(draft.meeting_details || "")}</textarea>
-      <div class="draft-action-buttons">
-        <button class="sent-btn" data-action="save-meeting-details" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!state.apiOnline ? "disabled" : ""}>Save meeting prep</button>
+      <div class="draft-actions">
+        <button class="draft-btn" data-action="save-meeting-details" data-draft-id="${escapeHtml(draft.draft_id)}" type="button" ${!state.apiOnline ? "disabled" : ""}>Save Meeting Prep</button>
       </div>
-    </article>
+    </div>
   `;
 }
 
@@ -547,9 +624,9 @@ async function copyDraftText(text) {
 
   try {
     await navigator.clipboard.writeText(cleanText);
-    renderApiStatus("Copied draft text");
+    renderApiStatus("Copied to clipboard");
   } catch {
-    renderApiStatus("Copy failed. Select the draft text manually.");
+    renderApiStatus("Copy failed. Select text manually.");
   }
 }
 
@@ -558,7 +635,7 @@ async function copyCaseStudySummary() {
     await navigator.clipboard.writeText(buildCaseStudySummary());
     renderApiStatus("Copied case study summary");
   } catch {
-    renderApiStatus("Copy failed. Select the summary manually.");
+    renderApiStatus("Copy failed. Select summary manually.");
   }
 }
 
@@ -601,9 +678,17 @@ async function addProspect(event) {
     elements.prospectForm.reset();
     document.querySelector("#sourceInput").value = "manual dashboard";
     renderApiStatus(`Added ${prospect.company_name}`);
+    toggleForm(false);
     await loadState();
   } catch (error) {
     renderApiStatus(error.message);
+  }
+}
+
+function toggleForm(show) {
+  state.formVisible = show ?? !state.formVisible;
+  if (elements.prospectForm) {
+    elements.prospectForm.style.display = state.formVisible ? "block" : "none";
   }
 }
 
@@ -705,12 +790,25 @@ function summarizeRunResult(type, result) {
   return `${scoutAdded} prospects, ${briefsAdded} briefs, ${draftsAdded} drafts`;
 }
 
+// Event listeners
 elements.refreshBtn.addEventListener("click", loadState);
 elements.prospectForm.addEventListener("submit", addProspect);
 elements.copyCaseStudyBtn.addEventListener("click", copyCaseStudySummary);
+
+if (elements.toggleFormBtn) {
+  elements.toggleFormBtn.addEventListener("click", () => toggleForm());
+}
+
+if (elements.mobileNavToggle) {
+  elements.mobileNavToggle.addEventListener("click", () => {
+    elements.sidebar.classList.toggle("open");
+  });
+}
+
 document.querySelectorAll("[data-runner]").forEach((button) => {
   button.addEventListener("click", () => runAgent(button.dataset.runner));
 });
+
 elements.detailPanel.addEventListener("click", (event) => {
   const action = event.target.closest("[data-action='approve-draft']");
   if (action) {
@@ -773,4 +871,15 @@ elements.detailPanel.addEventListener("click", (event) => {
     saveMeetingDetails(meetingDetailsAction.dataset.draftId, details);
   }
 });
+
+// Close sidebar when clicking outside on mobile
+document.addEventListener("click", (event) => {
+  if (window.innerWidth <= 900 && 
+      elements.sidebar.classList.contains("open") && 
+      !elements.sidebar.contains(event.target) && 
+      !elements.mobileNavToggle.contains(event.target)) {
+    elements.sidebar.classList.remove("open");
+  }
+});
+
 loadState();
